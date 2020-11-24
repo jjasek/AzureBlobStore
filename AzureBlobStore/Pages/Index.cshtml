@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Upload Files";
+}
+
+<div class="text-center">
+    <h2>Upload Files</h2>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <input multiple="multiple" asp-for="UploadedFile" />
+    </div>
+    <div>
+        <input type="submit" />
+    </div>
+</form>
+
+<div>
+    <div class="gallery">
+        @foreach (var picture in Model.pictures)
+        {
+            string path = $"{Model.uri}pictures/{picture}";
+            <figure class="gallery__item">
+                <img  class="gallery__img" src="@path" href="@path" width="100" height="100" />
+            </figure>
+        }
+    </div>
+</div>
+
+<style>
+    .gallery__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(8, 5vw);
+        grid-gap: 15px;
+    }
+
+</style>
